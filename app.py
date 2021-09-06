@@ -3,7 +3,8 @@ from flask_cors import CORS
 import dbUtils
 import os
 
-app = Flask(__name__)
+template_dir = os.path.abspath("/workspace/Templates/")
+app = Flask(__name__, template_folder=template_dir)
 CORS(app)
 
 # root_path = os.path.dirname(os.path.abspath(__file__)) 
@@ -13,7 +14,7 @@ CORS(app)
 ################################
 
 def get_template(template_name):
-    return f"./Templates/{template_name}"
+    return template_name
 
 @app.route("/", methods=["GET", "POST"])
 def index():
