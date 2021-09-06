@@ -3,12 +3,35 @@
 {% block title %}Stats{% endblock %}
 
 {% block content %}
+<div class="container">
     <div class="text-center mt-4">
-        <h2 class="text-center">Get stats on a shortened url</h2>
+        {% if not urlFetched %}
+            <h2 class="text-center">Get stats on a shortened url</h2>
 
-        <input type="text" value="" placeholder="ocheezy.dev/hFa7" name="urlToFetch" id="urlToFetch" /><br>
-        <button type="submit" class="btn btn-success mt-4">Submit</button>
-        
+            <input type="text" value="" placeholder="ocheezy.dev/hFa7" name="urlToFetch" id="urlToFetch" /><br>
+            <button type="submit" class="btn btn-success mt-4">Submit</button>
+        {% endif %}
+        {% if urlFetched %}
+            <h2 class="text-center">Stats for {{fetched_url}}</h2>
+            <table class="table-dark">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>URL ID</td>
+                        <td>Created</td>
+                        <td>Times Visited</td>
+                        <td>Last Visited</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{stats.url_id}}</td>
+                        <td>{{stats.date_created}}</td>
+                        <td>{{stats.times_visited}}</td>
+                        <td>{{stats.last_visited}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

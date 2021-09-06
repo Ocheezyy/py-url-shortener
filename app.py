@@ -6,9 +6,14 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+root_path = os.path.dirname(os.path.abspath(__file__)) 
+
 ################################
 #   ROUTES
 ################################
+
+def get_template(template_name):
+    return os.path.join(root_path, template_name)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -20,7 +25,7 @@ def index():
         if not url:
             urlCreated = request.form['urlCreated']
             if urlCreated == "urlCreated":
-                return render_template('index.jinja2', url_created=False)
+                return render_template(get_template('index.jinja2'), url_created=False)
 
             flash('The url is required')
             return redirect(url_for('index'))
@@ -29,16 +34,16 @@ def index():
         if result == "No url":
             flash('No url found')
         else:
-            return render_template('index.jinja2', url_created=True, created_url=result)
+            return render_template(get_template('index.jinja2'), url_created=True, created_url=result)
 
 @app.route("/stats", methods=["GET"])
 def url_stats():
     if request.method == 'GET':
-        return render_template('url_stats.jinja2')
+        return render_template('url_stats.jinja2', urlFetched=False)
     if request.method == 'POST':
         url_to_fetch = request.form['urlToFetch']
         result = dbUtils.get_url_stats(url_to_fetch)
-        return render_template('url_stats.jinja2', stats=result)
+        return render_template(get_template('url_stats.jinja2'), stats=result, urlFetched=True)
 
 @app.route("/u/<string:url>", methods=["GET"])
 def get_url(url):
