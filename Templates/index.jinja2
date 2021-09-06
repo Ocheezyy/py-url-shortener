@@ -1,0 +1,28 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}Create{% endblock %}
+
+{% block content %}
+<style>
+.created_url {
+    margin-top: 4em;
+}
+</style>
+<div class="container">
+    <div class="text-center mt-4">
+        {% if not url_created %}
+            <h2 class="text-center">Create a shortened url</h2>
+            <form method="post">
+                <input type="text" value="" placeholder="https://google.com" name="urlToAdd" id="urlToAdd" /><br>
+                <button type="submit" class="btn btn-success mt-4">Generate</button>
+            </form>
+        {% endif %}
+
+        {% if url_created %}
+            <input type="hidden" name="urlCreated" value="True" />
+            <p class="created_url">Generated url: <a href="{{created_url}}">{{created_url}}</a></p>
+            <button type="submit" class="btn btn-primary">Create another!</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
