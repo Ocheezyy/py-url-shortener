@@ -6,14 +6,14 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-root_path = os.path.dirname(os.path.abspath(__file__)) 
+# root_path = os.path.dirname(os.path.abspath(__file__)) 
 
 ################################
 #   ROUTES
 ################################
 
 def get_template(template_name):
-    return os.path.join(root_path, template_name)
+    return f"./Templates/{template_name}"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
