@@ -15,9 +15,10 @@
             </form>
         {% endif %}
         {% if urlFetched %}
-            <h2 class="text-center">Stats for {{fetched_url}}</h2>
-            <table class="table-dark">
-                <thead class="thead-dark">
+            <a class="btn btn-primary float-start" href="/stats">Back</a>
+            <h2 class="text-center mt-4">Stats for <a href="https://{{fetched_url}}">{{fetched_url}}</a></h2>
+            <table class="table ">
+                <thead class="table-dark">
                     <tr>
                         <td>URL ID</td>
                         <td>Created</td>
@@ -25,7 +26,7 @@
                         <td>Last Visited</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-striped">
                     <tr>
                         <td>{{stats.url_id}}</td>
                         <td>{{stats.date_created}}</td>
@@ -35,6 +36,9 @@
                 </tbody>
             </table>
         {% endif %}
+        {% for mesg in get_flashed_messages() %}
+            <p style="color: red;">{{ mesg }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

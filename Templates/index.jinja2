@@ -25,6 +25,9 @@
                 <button type="submit" class="btn btn-primary">Create another!</button>
             </form>
         {% endif %}
+        {% for mesg in get_flashed_messages() %}
+            <p style="color: red;">{{ mesg }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

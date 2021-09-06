@@ -58,5 +58,7 @@ def create_url(url, base_url):
 def get_url_stats(hash_id):
     if hash_id is not None:
         urls = get_conn()
-        url_data = urls.find_one({"url_id": hash_id}) # TODO: setup
+        url_data = urls.find_one({"url_id": hash_id})
         return url_data
+    else:
+        return 500
