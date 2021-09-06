@@ -35,7 +35,7 @@ def index():
         return render_template(get_template('index.jinja2'), url_created=True, created_url=result)
 
 
-@app.route("/stats", methods=["GET"])
+@app.route("/stats", methods=["GET", "POST"])
 def url_stats():
     if request.method == 'GET':
         return render_template('url_stats.jinja2', urlFetched=False)
