@@ -8,8 +8,11 @@
         {% if not urlFetched %}
             <h2 class="text-center">Get stats on a shortened url</h2>
 
-            <input type="text" value="" placeholder="ocheezy.dev/hFa7" name="urlToFetch" id="urlToFetch" /><br>
-            <button type="submit" class="btn btn-success mt-4">Submit</button>
+            <form method="post">
+                <label for="urlToFetch">Shortened ID: </label>
+                <input type="text" value="" placeholder="hFa71" name="urlToFetch" id="urlToFetch" required /><br>
+                <button type="submit" class="btn btn-success mt-4">Submit</button>
+            </form>
         {% endif %}
         {% if urlFetched %}
             <h2 class="text-center">Stats for {{fetched_url}}</h2>

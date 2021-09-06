@@ -1,16 +1,11 @@
 from pymongo import MongoClient, ReturnDocument
 from datetime import datetime as dt2
 from pytz import timezone
-import random
-import string
+import helper_methods as hm
 import os
 
 tz = timezone('EST')
 
-def generate_id(N):
-    return_str = ''.join(random.choices(string.ascii_letters + string.digits, k=N))
-    check_hash(return_str)
-    return return_str
 
 def check_hash(hash):
     urls = get_conn()
@@ -31,7 +26,7 @@ def get_url(hash_id):
         url_rec = urls.find_one_and_update(
             {"url_id": hash_id}, 
             { '$set': { "times_visited" : times_visited + 1, "last_visited": dt2.now(tz)} }, 
-            return_document = ReturnDocument.BEFORE
+            return_document = ReturnDocument.AFTER
         )
         return url_rec['url']
     else:
@@ -40,7 +35,7 @@ def get_url(hash_id):
 
 def create_url(url, base_url):
     if url is not None:
-        hash_id = generate_id(5)
+        hash_id = hm.generate_id(5)
 
         urls = get_conn()
         new_obj = {
@@ -52,7 +47,7 @@ def create_url(url, base_url):
         }
         try:
             urls.insert_one(new_obj)
-            returnStr = base_url + "u/" + new_obj['url_id']
+            returnStr = "ocheezy.dev/" + "u/" + new_obj['url_id']
         except Exception as e:
             returnStr = f"{e},, {str(e)}"
         return returnStr

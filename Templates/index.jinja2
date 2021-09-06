@@ -13,7 +13,7 @@
         {% if not url_created %}
             <h2 class="text-center">Create a shortened url</h2>
             <form method="post">
-                <input type="text" value="" placeholder="https://google.com" name="urlToAdd" id="urlToAdd" /><br>
+                <input type="text" value="" placeholder="https://google.com" name="urlToAdd" id="urlToAdd" required /><br>
                 <button type="submit" class="btn btn-success mt-4">Generate</button>
             </form>
         {% endif %}
@@ -21,7 +21,9 @@
         {% if url_created %}
             <input type="hidden" name="urlCreated" value="True" />
             <p class="created_url">Generated url: <a href="{{created_url}}">{{created_url}}</a></p>
-            <button type="submit" class="btn btn-primary">Create another!</button>
+            <form method="post">
+                <button type="submit" class="btn btn-primary">Create another!</button>
+            </form>
         {% endif %}
     </div>
 </div>
